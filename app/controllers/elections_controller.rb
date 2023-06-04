@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ElectionsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_election, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[ audit]
+  before_action :set_election, only: %i[show edit update destroy audit]
 
   # GET /elections
   # GET /elections.json
@@ -59,6 +59,15 @@ class ElectionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to elections_url, notice: 'Election was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /elections/1/audit
+  # GET /elections/1/audit.json
+  def audit
+    respond_to do |format|
+      format.html { render :audit }
+      # format.json { head :no_content }
     end
   end
 

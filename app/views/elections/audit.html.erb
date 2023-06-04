@@ -1,0 +1,18 @@
+<h1>Audit for Election <%= @election.name %></h1>
+<table>
+  <thead>
+    <tr>
+      <th>Activity</th>
+      <th>When</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @election.election_logs.each do |log| %>
+      <tr>
+        <td><%= log.activity %></td>
+        <td><%= log.created_at.to_formatted_s(:short) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
