@@ -62,6 +62,11 @@ class ElectionsController < ApplicationController
     end
   end
 
+  def audit
+    @election = Election.find(params[:id])
+    @election_versions = @election.versions
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
