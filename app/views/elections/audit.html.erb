@@ -1,0 +1,46 @@
+<h1>Election Audit</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Start at</th>
+      <th>End at</th>
+      <th>Settings</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= @election.name %></td>
+      <td><%= @election.start_at %></td>
+      <td><%= @election.end_at %></td>
+      <td><%= @election.settings %></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Settings</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Who</th>
+      <th>When</th>
+      <th>What</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @election_versions.each do |version| %>
+      <tr>
+        <td><%= version.event %></td>
+        <td><%= version.whodunnit %></td>
+        <td><%= version.created_at %></td>
+        <td><%= version.object %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', elections_path %>

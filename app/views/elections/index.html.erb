@@ -22,13 +22,12 @@
         <td><%= election.settings %></td>
         <td><%= link_to 'Show', election %></td>
         <td><%= link_to 'Edit', edit_election_path(election) %></td>
+        <td><%= link_to 'Audit', audit_election_path(election) %></td>
         <td><%= link_to 'Destroy', election, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
 
 <%= link_to 'New Election', new_election_path %> |
 <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
