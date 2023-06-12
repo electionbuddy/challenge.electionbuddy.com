@@ -29,7 +29,7 @@ class AnswersController < ApplicationController
     @answer = Answer.new(answer_params.merge(question: @question))
 
     respond_to do |format|
-      if @answer.save
+      if @answer.save(current_user)
         format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
         format.json { render :show, status: :created, location: @answer }
       else
@@ -43,7 +43,7 @@ class AnswersController < ApplicationController
   # PATCH/PUT /answers/1.json
   def update
     respond_to do |format|
-      if @answer.update(answer_params)
+      if @answer.update(answer_params, current_user)
         format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
         format.json { render :show, status: :ok, location: @answer }
       else
@@ -57,7 +57,7 @@ class AnswersController < ApplicationController
   # DELETE /answers/1.json
   def destroy
     question = @answer.question
-    @answer.destroy
+    @answer.destroy(current_user)
     respond_to do |format|
       format.html { redirect_to question_answers_url(question), notice: 'Answer was successfully destroyed.' }
       format.json { head :no_content }
