@@ -1,21 +1,14 @@
-<h1>Election Audit</h1>
-
+<h1>Question Audit<h1>
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Start at</th>
-      <th>End at</th>
-      <th>Settings</th>
     </tr>
   </thead>
-
+  
   <tbody>
     <tr>
-      <td><%= @election.name %></td>
-      <td><%= @election.start_at %></td>
-      <td><%= @election.end_at %></td>
-      <td><%= @election.settings %></td>
+      <td><%= @question.name %></td>
     </tr>
   </tbody>
 </table>
@@ -32,7 +25,7 @@
   </thead>
 
   <tbody>
-    <% @election_versions.each do |version| %>
+    <% @question_versions.each do |version| %>
       <tr>
         <td><%= version.event %></td>
         <td><%= version.whodunnit %></td>
@@ -43,4 +36,5 @@
   </tbody>
 </table>
 
-<%= link_to 'Back', elections_path %>
+<%= link_to 'Back', question_path %>
+
