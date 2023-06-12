@@ -2,6 +2,8 @@ module Auditable
   extend ActiveSupport::Concern
 
   included do
+    attr_accessor :whodunnit
+
     has_many :versions, as: :item
 
     after_create :audit_create
@@ -28,7 +30,7 @@ module Auditable
       item_type: self.class.name,
       item_id: id,
       event: event,
-      whodunnit: 1, #TODO: current_user.id,
+      whodunnit: whodunnit.id,
       object: previous_changes
     )
   end
