@@ -64,6 +64,11 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def audit
+    @question = Question.find(params[:id])
+    @question_versions = @question.versions
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
