@@ -1,0 +1,40 @@
+<h1>Answer Audit</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= @answer.name %></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Changes</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Who</th>
+      <th>When</th>
+      <th>What</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @answer_versions.each do |version| %>
+      <tr>
+        <td><%= version.event %></td>
+        <td><%= version.whodunnit %></td>
+        <td><%= version.created_at %></td>
+        <td><%= version.object %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', answer_path %>
