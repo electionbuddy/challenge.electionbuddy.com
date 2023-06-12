@@ -20,6 +20,7 @@
         <td><%= voter.election.name %></td>
         <td><%= link_to 'Show', voter %></td>
         <td><%= link_to 'Edit', edit_voter_path(voter) %></td>
+        <td><%= link_to 'Audit', audit_voter_path(voter) %></td>
         <td><%= link_to 'Destroy', voter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

@@ -1,0 +1,45 @@
+<h1>Voter Audit</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr>
+      <td><%= @voter.name %></td>
+      <td><%= @voter.email %></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Changes</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Who</th>
+      <th>When</th>
+      <th>What</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @voter_versions.each do |version| %>
+      <tr>
+        <td><%= version.event %></td>
+        <td><%= version.whodunnit %></td>
+        <td><%= version.created_at %></td>
+        <td><%= version.object %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', voter_path %>
+
+
