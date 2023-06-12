@@ -23,6 +23,14 @@ class AnswersTest < ApplicationSystemTestCase
     click_on 'Back'
   end
 
+  test 'audit a Answer' do
+    visit answers_url
+    click_on 'Audit', match: :first
+
+    assert_text 'Audit'
+    click_on 'Back'
+  end
+
   test 'updating a Answer' do
     visit answers_url
     click_on 'Edit', match: :first

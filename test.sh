@@ -1,4 +1,7 @@
 #!/bin/bash
 
 docker build -t electionbuddy-challenge .
-docker run -it electionbuddy-challenge bundle exec rake test
+docker run --name electionbuddy-challenge -d electionbuddy-challenge
+docker exec -it electionbuddy-challenge bin/rails test
+docker stop electionbuddy-challenge
+docker rm electionbuddy-challenge

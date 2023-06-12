@@ -18,8 +18,12 @@ class ElectionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should create election' do
+  test 'should create election and auditable version' do
     assert_difference('Election.count') do
+      post elections_url, params: { election: { end_at: @election.end_at, name: @election.name, settings: @election.settings, start_at: @election.start_at } }
+    end
+
+    assert_difference('Version.count') do
       post elections_url, params: { election: { end_at: @election.end_at, name: @election.name, settings: @election.settings, start_at: @election.start_at } }
     end
 
@@ -36,8 +40,13 @@ class ElectionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should update election' do
+  test 'should update election and new auditable version' do
     patch election_url(@election), params: { election: { end_at: @election.end_at, name: @election.name, settings: @election.settings, start_at: @election.start_at } }
+
+    assert_difference('Version.count', +1) do
+      patch election_url(@election), params: { election: { end_at: @election.end_at, name: @election.name, settings: @election.settings, start_at: @election.start_at } }
+    end
+    
     assert_redirected_to election_url(@election)
   end
 

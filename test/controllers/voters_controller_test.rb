@@ -19,8 +19,12 @@ class VotersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should create voter' do
+  test 'should create voter and auditable version' do
     assert_difference('Voter.count') do
+      post election_voters_url(election_id: @election), params: { voter: { election_id: @voter.election_id, email: @voter.email, name: @voter.name } }
+    end
+
+    assert_difference('Version.count') do
       post election_voters_url(election_id: @election), params: { voter: { election_id: @voter.election_id, email: @voter.email, name: @voter.name } }
     end
 
@@ -37,8 +41,11 @@ class VotersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should update voter' do
+  test 'should update voter and create new auditable version' do
     patch voter_url(@voter), params: { voter: { election_id: @voter.election_id, email: @voter.email, name: @voter.name } }
+    assert_difference('Version.count', +1) do
+      patch voter_url(@voter), params: { voter: { election_id: @voter.election_id, email: @voter.email, name: @voter.name } }
+    end
     assert_redirected_to voter_url(@voter)
   end
 

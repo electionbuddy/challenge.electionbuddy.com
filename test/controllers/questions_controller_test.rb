@@ -19,8 +19,12 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should create question' do
+  test 'should create question and auditable version' do
     assert_difference('Question.count') do
+      post election_questions_url(election_id: @election), params: { question: { answer_ids: @question.answer_ids, name: @question.name } }
+    end
+
+    assert_difference('Version.count') do
       post election_questions_url(election_id: @election), params: { question: { answer_ids: @question.answer_ids, name: @question.name } }
     end
 
@@ -37,8 +41,13 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should update question' do
+  test 'should update question and create new auditable version' do
     patch question_url(@question), params: { question: { answer_ids: @question.answer_ids, name: @question.name } }
+
+    assert_difference('Version.count', +1) do
+      patch question_url(@question), params: { question: { answer_ids: @question.answer_ids, name: @question.name } }
+    end
+    
     assert_redirected_to question_url(@question)
   end
 
