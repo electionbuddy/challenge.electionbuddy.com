@@ -28,7 +28,7 @@ class ElectionsController < ApplicationController
     @election = Election.new(election_params.merge(user: current_user))
 
     respond_to do |format|
-      if @election.save
+      if @election.save(current_user)
         format.html { redirect_to @election, notice: 'Election was successfully created.' }
         format.json { render :show, status: :created, location: @election }
       else
@@ -42,7 +42,7 @@ class ElectionsController < ApplicationController
   # PATCH/PUT /elections/1.json
   def update
     respond_to do |format|
-      if @election.update(election_params)
+      if @election.update(election_params, current_user)
         format.html { redirect_to @election, notice: 'Election was successfully updated.' }
         format.json { render :show, status: :ok, location: @election }
       else
@@ -55,7 +55,7 @@ class ElectionsController < ApplicationController
   # DELETE /elections/1
   # DELETE /elections/1.json
   def destroy
-    @election.destroy
+    @election.destroy(current_user)
     respond_to do |format|
       format.html { redirect_to elections_url, notice: 'Election was successfully destroyed.' }
       format.json { head :no_content }
