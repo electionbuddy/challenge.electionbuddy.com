@@ -68,6 +68,11 @@ class VotersController < ApplicationController
 
   def submit; end
 
+  def audit
+    @voter = Voter.find(params[:id])
+    @voter_versions = @voter.versions
+  end
+  
   private
 
   # Use callbacks to share common setup or constraints between actions.
